@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#dff3ff">
+  <meta name="description" content="ثبت آفلاین کارکرد و گزارش کدهای تولید">
+  <title>مدیریت کد</title>
+  <link rel="stylesheet" href="./css/styles.css">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png">
+  <link rel="apple-touch-icon" href="./icons/icon-192.png">
+  <script src="./js/app.js" defer></script>
+</head>
+<body>
+
+<header class="topbar"><div class="brand"><span class="brand-mark">م</span><div><strong>مدیریت کد</strong><small>ثبت کارکرد و گزارش</small></div></div><span class="status-dot" title="ذخیره محلی"></span></header><nav class="topnav" aria-label="بخش‌های برنامه">
+<button type="button" class="active" data-page="dashboard">داشبورد نیرو</button><button type="button" data-page="register">ثبت کد</button><button type="button" data-page="definitions">تعاریف</button><button type="button" data-page="storage">انبار و ذخیره‌سازی</button><button type="button" data-page="reports">گزارش‌ها</button>
+</nav><main class="container">
+<section class="page" id="page-dashboard">
+<div class="welcome">
+<div><p class="eyebrow">پنل کاربری</p><h1>داشبورد نیرو</h1><p class="muted">خلاصهٔ کارکرد ثبت‌شدهٔ شما</p></div>
+<div class="avatar">ن</div>
+</div>
+<div class="stats-grid">
+<article class="stat-card blue"><span>درآمد امروز</span><strong id="todayIncome">۰</strong><small>تومان</small></article>
+<article class="stat-card green"><span>درآمد این هفته</span><strong id="weekIncome">۰</strong><small>تومان</small></article>
+<article class="stat-card pale"><span>درآمد این ماه</span><strong id="monthIncome">۰</strong><small>تومان</small></article>
+</div>
+<div class="section-title"><h2>شروع سریع</h2></div>
+<div class="quick-actions">
+<a class="quick-card" href="#register" data-goto="register"><span class="quick-icon">＋</span><strong>ثبت کد جدید</strong><small>ثبت کد یا بازه</small></a>
+<a class="quick-card" href="#definitions" data-goto="definitions"><span class="quick-icon">☷</span><strong>تعریف قسمت‌ها</strong><small>نرخ و قسمت فعال</small></a>
+<a class="quick-card" href="#reports" data-goto="reports"><span class="quick-icon">▤</span><strong>مشاهده گزارش</strong><small>سوابق ثبت‌شده</small></a>
+</div>
+<div class="notice"><strong>یادآوری:</strong> تعداد هر کد از فایل بک‌آپ کارخانه خوانده می‌شود و قابل تغییر توسط نیرو نیست.</div>
+</section>
+<section class="page hidden" id="page-register"><div class="page-heading"><p class="eyebrow">ورود کارکرد</p><h1>ثبت کد</h1></div>
+<div id="activeSections" class="section-inputs"><p class="empty-state">برای نمایش قسمت‌ها، ابتدا فایل بک‌آپ کارخانه را در بخش «انبار و ذخیره‌سازی» بارگذاری کن و قسمت‌ها را در «تعاریف» فعال کن.</p></div>
+<div id="registerMessage" class="form-message" role="status"></div>
+<div class="section-title"><h2>آخرین ثبت‌ها</h2><span id="recentCount" class="pill">۰ رکورد</span></div><div id="recentRecords" class="record-list"></div></section>
+<section class="page hidden" id="page-definitions">
+<div class="page-heading"><p class="eyebrow">تنظیمات شخصی</p><h1>تعاریف قسمت‌ها</h1></div>
+
+<div class="definitions-list" id="definitionsList"></div>
+<button class="primary-btn sticky-action" id="saveDefinitions">ذخیره تعاریف</button>
+<p class="form-message" id="definitionsMessage" role="status"></p>
+</section>
+<section class="page hidden" id="page-storage">
+<div class="page-heading"><p class="eyebrow">مدیریت داده</p><h1>انبار و ذخیره‌سازی</h1><p class="muted">پشتیبان‌گیری و بازیابی اطلاعات این گوشی.</p></div>
+<div class="card storage-card">
+<h2>بارگذاری فایل آمار</h2>
+
+<label class="file-btn">انتخاب فایل<input accept=".json,application/json" id="importFile" type="file"/></label>
+<p class="form-message" id="importMessage" role="status"></p>
+</div>
+<div class="card storage-card">
+<h2>ذخیره و بازیابی</h2>
+
+<button class="secondary-btn" id="exportBackup">ذخیره فایل پشتیبان</button>
+<label class="file-btn">بازیابی از حافظه<input accept=".json,application/json" id="restoreFile" type="file"/></label>
+<p class="form-message" id="restoreMessage" role="status"></p>
+</div>
+<div class="card storage-card">
+<h2>ارسال به سرور</h2>
+
+<button class="secondary-btn" disabled="">ارسال به سرور (به‌زودی)</button>
+</div>
+<div class="card storage-card">
+<h2>وضعیت داده‌ها</h2><p class="muted" id="dataStatus">در حال بررسی…</p>
+</div>
+</section>
+<section class="page hidden" id="page-reports">
+<div class="page-heading"><p class="eyebrow">مرور کارکرد</p><h1>گزارش‌ها</h1></div>
+<div class="stats-grid report-stats">
+<article class="stat-card blue"><span>تعداد رکوردها</span><strong id="reportRecords">۰</strong></article>
+<article class="stat-card green"><span>کدهای یکتا</span><strong id="reportCodes">۰</strong></article>
+<article class="stat-card pale"><span>جمع درآمد</span><strong id="reportIncome">۰</strong><small>تومان</small></article>
+</div>
+<div class="card compact-controls">
+<label for="reportSection">گزارش بر اساس قسمت فعال</label>
+<select id="reportSection"><option value="">همهٔ قسمت‌ها</option></select>
+<div class="summary-box" id="sectionSummary"></div>
+</div>
+<div class="section-title"><h2>رکوردهای گزارش</h2><div class="no-print"><button class="primary-btn pdf-button" id="exportPDF" type="button">خروجی PDF</button> <button class="text-danger" id="clearRecords" type="button">پاک‌کردن سوابق</button></div></div><p id="printSelectedLabel" style="display:none"></p>
+<div class="record-list" id="allRecords"></div>
+</section>
+</main>
+<div class="edit-modal hidden" id="editModal" role="dialog" aria-modal="true" aria-labelledby="editTitle">
+  <div class="edit-panel">
+    <div class="edit-heading"><h2 id="editTitle">ویرایش کد ثبت‌شده</h2><button type="button" id="closeEdit" class="modal-close" aria-label="بستن">×</button></div>
+    <input type="hidden" id="editRecordId">
+    <div class="field"><label for="editCode">شماره کد</label><input id="editCode" type="number" min="0" step="1" inputmode="numeric"></div>
+    <div class="field"><label for="editSection">قسمت کاری</label><select id="editSection"></select></div>
+    <div class="date-picker" data-date-picker="edit">
+      <label>تاریخ شمسی ثبت</label>
+      <div class="date-selects"><select id="date-year-edit" aria-label="سال شمسی"></select><select id="date-month-edit" aria-label="ماه شمسی"></select><select id="date-day-edit" aria-label="روز شمسی"></select></div>
+    </div>
+    <p class="form-message" id="editMessage" role="status"></p>
+    <div class="modal-actions"><button type="button" class="secondary-btn" id="cancelEdit">انصراف</button><button type="button" class="primary-btn" id="saveEdit">ذخیره تغییرات</button></div>
+  </div>
+</div>
+<footer class="footer">مدیریت کد · نسخهٔ وب قابل نصب</footer>
+</body>
+</html>
